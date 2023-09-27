@@ -1,0 +1,24 @@
+{
+  "menu": [
+    {
+      "id": "home",
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "id": "contact",
+      "label": "Contact Us",
+      "url": "/about"
+    },
+    {
+      "id": "premium",
+      "label": "Premium",
+      "url": "/premium"
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "url": "/profile"
+    }
+  ]
+}
