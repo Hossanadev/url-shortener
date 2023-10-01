@@ -19,3 +19,11 @@ export interface TableProps {
   pageSize: number;
   className?: string;
 }
+
+export interface ModalProps {
+  modalMessage: string;
+  modalOpen: boolean;
+  closeModal: () => void;
+  actionBtn: () => void;
+  actionText: string;
+}

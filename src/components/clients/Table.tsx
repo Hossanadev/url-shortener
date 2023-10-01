@@ -2,6 +2,7 @@
 import { FC, useState } from "react";
 import { TableProps } from "../../../utilities/types";
 import { Clipboard, Share2, Trash2 } from "react-feather";
+import Modal from "./Modal";
 
 const CustomTable: FC<TableProps> = ({
   data,
@@ -12,6 +13,10 @@ const CustomTable: FC<TableProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [sortedData, setSortedData] = useState(data);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+  const [toBeDeleteRows, setToBeDeletedRows] = useState<Set<number>>(new Set());
+  const [deleteSingleRowModal, setDeleteSingleRowModal] =
+    useState<boolean>(false);
+
   const totalPages = Math.ceil(data.length / pageSize);
 
   const sortData = (key: string) => {
@@ -40,6 +45,17 @@ const CustomTable: FC<TableProps> = ({
     }
   };
 
+  const confirmDeleteSingleRow = (id: number) => {
+    setDeleteSingleRowModal(true);
+    const deletableRow = new Set(toBeDeleteRows).add(id);
+    setToBeDeletedRows(deletableRow);
+  };
+
+  const deleteSingleRow = () => {
+    setSortedData(data.filter((data) => !toBeDeleteRows.has(data.id)));
+    setDeleteSingleRowModal(false);
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -64,7 +80,10 @@ const CustomTable: FC<TableProps> = ({
                 {" "}
                 <input
                   type="checkbox"
-                  checked={selectedRows.size === paginatedData.length}
+                  checked={
+                    selectedRows.size === sortedData.length &&
+                    sortedData.length > 0
+                  }
                   onChange={handleSelectAll}
                 />
               </th>
@@ -81,6 +100,11 @@ const CustomTable: FC<TableProps> = ({
               <th className="font-normal px-2 py-3 text-left flex items-center space-x-0.5">
                 <span>Action</span>
                 {selectedRows.size > 1 && <Trash2 size={16} fill="#FF0000" />}
+                {selectedRows.size > 0 && (
+                  <span className="bg-white px-1 text-red-500 rounded-full border border-[#14344C] font-bold">
+                    {selectedRows.size}
+                  </span>
+                )}
               </th>
             </tr>
           </thead>
@@ -124,19 +148,24 @@ const CustomTable: FC<TableProps> = ({
                     fill="#FFFFFF"
                     className="cursor-pointer"
                   />
-                  <Trash2
-                    size={16}
-                    color="#FF0000"
-                    fill="#FFFFFF"
-                    className="cursor-pointer"
-                  />
+                  <span
+                    onClick={() => confirmDeleteSingleRow(item.id)}
+                    className=""
+                  >
+                    <Trash2
+                      size={16}
+                      color="#FF0000"
+                      fill="#FFFFFF"
+                      className="cursor-pointer"
+                    />
+                  </span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <section className="pagination flex justify-end p-2 items-center">
+      <section className="pagination flex justify-end px-2 py-4 items-center">
         <span className="mr-2 text-sm">{"Pagination:"}</span>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button
@@ -150,6 +179,16 @@ const CustomTable: FC<TableProps> = ({
           </button>
         ))}
       </section>
+      <Modal
+        modalOpen={deleteSingleRowModal}
+        closeModal={() => {
+          setDeleteSingleRowModal(false);
+          setToBeDeletedRows(new Set());
+        }}
+        actionBtn={() => deleteSingleRow()}
+        modalMessage={"You're about to delete this row!"}
+        actionText="Delete"
+      />
     </div>
   );
 };
