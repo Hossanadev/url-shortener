@@ -12,8 +12,8 @@ const Layout: React.FC<ChildrenProps> = (props) => {
     <div className="layout">
       <Header showAside={setShowAside} />
       <aside
-        className={`bg-white h-screen py-28 w-[70%] px-3 text-xs border-r border-black/20 absolute shadow-2xl transition-all duration-700 ease-linear z-10 hidden max-md:block ${
-          showAside ? "translate-x-0" : "-translate-x-full"
+        className={`bg-white pt-28 pb-10 w-full px-3 text-xs absolute shadow-2xl rounded-b rounded-2xl transition-all duration-700 ease-linear z-10 hidden max-md:block ${
+          showAside ? "translate-y-0" : "-translate-y-full"
         } `}
       >
         <AsideNav />

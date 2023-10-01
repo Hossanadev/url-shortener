@@ -1,6 +1,8 @@
 import Card from "@/components/clients/Card";
+import Table from "@/components/clients/Table";
 import React from "react";
 import { PieChart } from "react-feather";
+import { columns, data } from "../../utilities/table.json";
 
 export const HomePage: React.FC = (props) => {
   const {} = props;
@@ -41,18 +43,20 @@ export const HomePage: React.FC = (props) => {
           </label>
           <div className="flex space-x-2 items-center">
             <input
+              id="url"
               type="text"
-              className="border p-2 text-sm rounded-sm block focus:ring-0 outline-none focus:border-green-500"
+              className="border border-[#464646]/20 p-2 text-sm rounded-sm block focus:ring-0 outline-none border-green-200 focus:border-green-500"
               required
             />
             <button
               type="submit"
-              className="bg-green-500 hover:bg-white hover:text-green-500 hover:border-green-500 text-sm text-white p-2 rounded-sm shadow-2xl border-white border ease-linear transition-colors duration-500"
+              className="bg-green-500 hover:bg-white hover:text-green-500 hover:border-green-500 text-sm text-white py-2 px-4 rounded-sm shadow-2xl border-green-200 border ease-linear transition-colors duration-300"
             >
               Shorten
             </button>
           </div>
         </form>
+        <Table className="mt-6" columns={columns} data={data} pageSize={10} />
       </section>
     </>
   );

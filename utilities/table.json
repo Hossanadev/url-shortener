@@ -1,0 +1,44 @@
+{
+  "columns": [
+    { "key": "id", "header": "S/N" },
+    { "key": "original_url", "header": "Original URL", "link": "original_url" },
+    {
+      "key": "shortened_url",
+      "header": "Shortened URL",
+      "link": "shortened_url"
+    },
+    { "key": "date", "header": "Date" },
+    { "key": "noclicks", "header": "No. Clicks" }
+  ],
+
+  "data": [
+    {
+      "id": 1,
+      "original_url": "https://google.com",
+      "shortened_url": "https://123.com",
+      "date": "12-09-2023",
+      "noclicks": "5"
+    },
+    {
+      "id": 2,
+      "original_url": "https://google.com",
+      "shortened_url": "https://123.com",
+      "date": "13-09-2023",
+      "noclicks": "2"
+    },
+    {
+      "id": 3,
+      "original_url": "https://google.com",
+      "shortened_url": "https://123.com",
+      "date": "17-09-2023",
+      "noclicks": "8"
+    },
+    {
+      "id": 4,
+      "original_url": "https://google.com",
+      "shortened_url": "https://123.com",
+      "date": "19-09-2023",
+      "noclicks": "6"
+    }
+  ]
+}
