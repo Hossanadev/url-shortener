@@ -45,6 +45,7 @@ export const HomePage: React.FC = (props) => {
             <input
               id="url"
               type="text"
+              placeholder="Enter URL"
               className="border border-[#464646]/20 p-2 text-sm rounded-sm block focus:ring-0 outline-none border-green-200 focus:border-green-500"
               required
             />
