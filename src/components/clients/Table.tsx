@@ -67,10 +67,20 @@ const CustomTable: FC<TableProps> = ({
 
   return (
     <div className="rounded bg-white my-5">
-      <section className="flex justify-end">
-        <span className="bg-green-500 hover:bg-green-600 text-white cursor-pointer shadow text-sm px-3 py-1 rounded-tr">
-          View Delete
+      <section className="flex justify-between space-x-5">
+        <span className="bg-white text-blue-500 cursor-pointer shadow-md text-sm px-1 md:px-3 py-1 font-medium rounded-tl">
+          {selectedRows.size} {"Selected"}
         </span>
+        <div className="space-x-0.5">
+          {selectedRows.size > 0 && (
+            <span className="bg-red-500 hover:bg-red-600 text-white cursor-pointer shadow text-sm px-1 md:px-3 py-1">
+              Delete Selected
+            </span>
+          )}
+          <span className="bg-green-500 hover:bg-green-600 text-white cursor-pointer shadow text-sm px-1 md:px-3 py-1 rounded-tr">
+            View Deleted
+          </span>
+        </div>
       </section>
       <div className={`${className} overflow-auto`}>
         <table className="min-w-full table-auto shadow">
@@ -99,12 +109,6 @@ const CustomTable: FC<TableProps> = ({
               ))}
               <th className="font-normal px-2 py-3 text-left flex items-center space-x-0.5">
                 <span>Action</span>
-                {selectedRows.size > 1 && <Trash2 size={16} fill="#FF0000" />}
-                {selectedRows.size > 0 && (
-                  <span className="bg-white px-1 text-red-500 rounded-full border border-[#14344C] font-bold">
-                    {selectedRows.size}
-                  </span>
-                )}
               </th>
             </tr>
           </thead>

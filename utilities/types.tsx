@@ -27,3 +27,7 @@ export interface ModalProps {
   actionBtn: () => void;
   actionText: string;
 }
+
+export interface GuestProps {
+  isAuthenticated: (value: boolean) => void;
+}
