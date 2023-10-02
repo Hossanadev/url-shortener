@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { Navigation } from "./Navigation";
-import { X, AlignRight } from "react-feather";
+import { X, AlignRight, User } from "react-feather";
 import { SidebarProps } from "../../../utilities/types";
+import UserProfile from "./User";
 
 export const Header: React.FC<SidebarProps> = (props) => {
   const { showAside } = props;
@@ -14,20 +15,23 @@ export const Header: React.FC<SidebarProps> = (props) => {
   return (
     <div className="header flex justify-between items-center">
       <h1 className="font-semibold text-xl md:text-2xl">URL Manager</h1>
-      <Navigation />
-      {showSidebar ? (
+      <div className="flex space-x-6 items-center">
+        <Navigation />
+        <UserProfile />
+        {showSidebar ? (
           <AlignRight
-              size={28}
-              onClick={toggleAside}
-              className="hidden max-md:block cursor-pointer"
+            size={28}
+            onClick={toggleAside}
+            className="hidden max-md:block cursor-pointer"
           />
-      ) : (
+        ) : (
           <X
-              size={28}
-              onClick={toggleAside}
-              className="hidden max-md:block cursor-pointer"
+            size={28}
+            onClick={toggleAside}
+            className="hidden max-md:block cursor-pointer"
           />
-      )}
+        )}
+      </div>
     </div>
   );
 };
