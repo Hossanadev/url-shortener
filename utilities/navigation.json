@@ -6,19 +6,14 @@
       "url": "/"
     },
     {
-      "id": "contact",
-      "label": "Contact Us",
-      "url": "/about"
+      "id": "campaigns",
+      "label": "Campaigns",
+      "url": "/campaigns"
     },
     {
       "id": "premium",
       "label": "Premium",
       "url": "/premium"
-    },
-    {
-      "id": "profile",
-      "label": "Profile",
-      "url": "/profile"
     }
   ]
 }

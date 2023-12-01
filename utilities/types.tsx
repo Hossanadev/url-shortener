@@ -9,8 +9,16 @@ export interface SidebarProps {
 export interface CardProps<T> {
   icon: T;
   title: string;
-  totalClicks: string;
+  clicks: string | number;
   className?: string;
+}
+
+export interface UrlProps {
+  id: number;
+  long_url: string;
+  short_url: string;
+  date_created: string;
+  clicks: string;
 }
 
 export interface TableProps {
@@ -29,5 +37,12 @@ export interface ModalProps {
 }
 
 export interface GuestProps {
-  isAuthenticated: (value: boolean) => void;
+  setIsAuthenticated: (value: boolean) => void;
+}
+
+export type DashboardStatsType = {
+  total_clicked: number;
+  total_unclicked: number;
+  total_deleted: number;
+  total_shortened: number;
 }
