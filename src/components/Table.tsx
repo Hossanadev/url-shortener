@@ -1,6 +1,6 @@
 "use client";
 import { FC, useState } from "react";
-import { TableProps } from "../../../utilities/types";
+import { TableProps } from "../../utilities/types";
 import { Clipboard, Share2, Trash2 } from "react-feather";
 import Modal from "./Modal";
 
@@ -11,7 +11,7 @@ const CustomTable: FC<TableProps> = ({
   className,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortedData, setSortedData] = useState(data);
+  const [tableData, setTableData] = useState(data);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [toBeDeleteRows, setToBeDeletedRows] = useState<Set<number>>(new Set());
   const [deleteSingleRowModal, setDeleteSingleRowModal] =
@@ -19,19 +19,9 @@ const CustomTable: FC<TableProps> = ({
 
   const totalPages = Math.ceil(data.length / pageSize);
 
-  const sortData = (key: string) => {
-    const sorted = [...sortedData].sort((a, b) => {
-      if (a[key] < b[key]) return -1;
-      if (a[key] > b[key]) return 1;
-      return 0;
-    });
-    setSortedData(sorted);
-  };
-
   const handleRowSelect = (id: number) => {
     const newCheckboxes = new Set(selectedRows);
     newCheckboxes.has(id) ? newCheckboxes.delete(id) : newCheckboxes.add(id);
-
     setSelectedRows(newCheckboxes);
   };
 
@@ -52,7 +42,7 @@ const CustomTable: FC<TableProps> = ({
   };
 
   const deleteSingleRow = () => {
-    setSortedData(data.filter((data) => !toBeDeleteRows.has(data.id)));
+    setTableData(data.filter((data) => !toBeDeleteRows.has(data.id)));
     setDeleteSingleRowModal(false);
   };
 
@@ -60,7 +50,7 @@ const CustomTable: FC<TableProps> = ({
     setCurrentPage(page);
   };
 
-  const paginatedData = sortedData.slice(
+  const paginatedData = data.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
@@ -91,8 +81,8 @@ const CustomTable: FC<TableProps> = ({
                 <input
                   type="checkbox"
                   checked={
-                    selectedRows.size === sortedData.length &&
-                    sortedData.length > 0
+                    selectedRows.size === data.length &&
+                    data.length > 0
                   }
                   onChange={handleSelectAll}
                 />
@@ -101,10 +91,7 @@ const CustomTable: FC<TableProps> = ({
                 <th
                   className="font-normal px-2 py-3 items-center text-left whitespace-nowrap"
                   key={column.key}
-                >
-                  <button onClick={() => sortData(column.key)}>
-                    {column.header}
-                  </button>
+                > {column.header}
                 </th>
               ))}
               <th className="font-normal px-2 py-3 text-left flex items-center space-x-0.5">
@@ -116,7 +103,7 @@ const CustomTable: FC<TableProps> = ({
             {paginatedData.map((item, index) => (
               <tr
                 key={item.id}
-                className={`${index % 2 === 0 ? "bg-white" : "bg-black/10"}`}
+                className={`${index % 2 === 0 ? "bg-white" : "bg-[#e5e5e5]"}`}
               >
                 <td className="py-1 px-2 text-sm">
                   <input
@@ -129,7 +116,7 @@ const CustomTable: FC<TableProps> = ({
                   <td
                     className={`${
                       column.link ? "text-[#2563eb] underline" : ""
-                    } py-1 px-2 text-sm whitespace-nowrap`}
+                    } p-2 text-sm whitespace-nowrap`}
                     key={column.key}
                   >
                     {column.link ? (

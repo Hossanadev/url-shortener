@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
     "@types/react-redux": "^7.1.27",
+    "axios": "^1.6.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

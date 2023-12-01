@@ -1,36 +1,77 @@
-import Card from "@/components/clients/Card";
-import Table from "@/components/clients/Table";
-import React from "react";
+import Card from "@/components/Card";
+import Table from "@/components/Table";
+import React, {useEffect, useState} from "react";
 import { PieChart } from "react-feather";
-import { columns, data } from "../../utilities/table.json";
+import { columns } from "../../utilities/table.json";
+import axios from "axios";
+import {DashboardStatsType, UrlProps} from "../../utilities/types";
 
 export const HomePage: React.FC = (props) => {
   const {} = props;
+  const [listUrls, setListUrls] = useState<UrlProps[]>([]);
+  const [dashboardStats, setDashboardStats] = useState<DashboardStatsType>({total_clicked: 0, total_unclicked: 0, total_deleted: 0, total_shortened: 0});
+
+  useEffect(() => {
+    const getStats = (url: string) => {
+      try {
+        axios
+            .get(url)
+            .then((res) => {
+              if (res.status === 200) {
+                const {stats} = res.data
+                setDashboardStats(stats)
+              }
+            });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStats("http://localhost:8080/listStats")
+  }, [])
+
+  useEffect(() => {
+    const getURLs = (url: string) => {
+      try {
+        axios
+            .get(url)
+            .then((res) => {
+              if (res.status === 200) {
+                const {data} = res.data
+                setListUrls(data)
+              }
+            });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getURLs("http://localhost:8080/list")
+  }, [])
+
   return (
     <>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-3 md:p-6 gap-3">
         <Card
           icon={<PieChart size={45} />}
           title="Total Clicked"
-          totalClicks="23"
+          clicks={dashboardStats?.total_clicked}
           className="bg-green-500"
         />
         <Card
           icon={<PieChart size={45} />}
           title="Total Unclicked"
-          totalClicks="15"
+          clicks={dashboardStats?.total_unclicked}
           className="bg-yellow-500"
         />
         <Card
           icon={<PieChart size={45} />}
           title="Total Deleted"
-          totalClicks="35"
+          clicks={dashboardStats?.total_deleted}
           className="bg-red-500"
         />
         <Card
           icon={<PieChart size={45} />}
           title="Total Shortened"
-          totalClicks="61"
+          clicks={dashboardStats?.total_shortened}
           className="bg-amber-950"
         />
       </div>
@@ -46,18 +87,18 @@ export const HomePage: React.FC = (props) => {
               id="url"
               type="text"
               placeholder="Enter URL"
-              className="border border-[#464646]/20 p-2 text-sm rounded-sm block focus:ring-0 outline-none border-green-200 focus:border-green-500"
+              className="border border-gray-400 p-2 text-xs h-8 rounded-sm block focus:ring-0 outline-none focus:border-green-500"
               required
             />
             <button
               type="submit"
-              className="bg-green-500 hover:bg-white hover:text-green-500 hover:border-green-500 text-sm text-white py-2 px-4 rounded-sm shadow-2xl border-green-200 border ease-linear transition-colors duration-300"
+              className="bg-green-500 hover:bg-green-600 hover:text-white h-8 text-white text-xs px-4 rounded-sm ease-linear transition-colors duration-200"
             >
               Shorten
             </button>
           </div>
         </form>
-        <Table className="mt-6" columns={columns} data={data} pageSize={10} />
+        <Table className="mt-6" columns={columns} data={listUrls} pageSize={10} />
       </section>
     </>
   );

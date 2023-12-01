@@ -1,22 +1,22 @@
 "use client";
-import Guest from "@/components/clients/Guest";
-import Layout from "@/components/clients/Layout";
+import Guest from "@/components/Layout/Guest";
+import Authenticated from "@/components/Layout/Authenticated";
 import { HomePage } from "@/pages/Home";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
 
 export default function Home() {
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   return (
     <Provider store={store}>
       <div className="">
-        {authenticated ? (
-          <Layout>
+        {isAuthenticated ? (
+          <Authenticated>
             <HomePage />
-          </Layout>
+          </Authenticated>
         ) : (
-          <Guest isAuthenticated={setAuthenticated} />
+          <Guest setIsAuthenticated={setIsAuthenticated} />
         )}
       </div>
     </Provider>

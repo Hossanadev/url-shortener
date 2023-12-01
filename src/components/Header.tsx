@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { Navigation } from "./Navigation";
-import { X, AlignRight, User } from "react-feather";
-import { SidebarProps } from "../../../utilities/types";
+import { X, AlignRight } from "react-feather";
+import { SidebarProps } from "../../utilities/types";
 import UserProfile from "./User";
 
 export const Header: React.FC<SidebarProps> = (props) => {
@@ -22,13 +22,13 @@ export const Header: React.FC<SidebarProps> = (props) => {
           <AlignRight
             size={28}
             onClick={toggleAside}
-            className="hidden max-md:block cursor-pointer"
+            className="hidden max-lg:block cursor-pointer"
           />
         ) : (
           <X
             size={28}
             onClick={toggleAside}
-            className="hidden max-md:block cursor-pointer"
+            className="hidden max-lg:block cursor-pointer"
           />
         )}
       </div>

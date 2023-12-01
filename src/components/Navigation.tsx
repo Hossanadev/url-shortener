@@ -1,5 +1,5 @@
 import React from "react";
-import { menu } from "../../../utilities/navigation.json";
+import { menu } from "../../utilities/navigation.json";
 
 export const Navigation: React.FC = () => {
   return (

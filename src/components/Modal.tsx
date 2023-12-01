@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ModalProps } from "../../../utilities/types";
+import { ModalProps } from "../../utilities/types";
 import { AlertTriangle, X } from "react-feather";
 
 const Modal: FC<ModalProps> = (props) => {
@@ -14,7 +14,7 @@ const Modal: FC<ModalProps> = (props) => {
         <div className="flex justify-end">
           <span
             onClick={() => closeModal()}
-            className="bg-red-500 hover:bg-red-600 duration-500 transition-colors cursor-pointer px-2 py-1 shadow block"
+            className="bg-red-500 rounded-bl hover:bg-red-600 duration-500 transition-colors cursor-pointer px-2 py-1 shadow block"
           >
             <X size={16} color="#ffffff" />
           </span>
@@ -22,11 +22,11 @@ const Modal: FC<ModalProps> = (props) => {
         <span className="flex justify-center">
           <AlertTriangle color="#FFFF00" fill="#000000" size={40} />
         </span>
-        <p className="p-4 text-center">{modalMessage}</p>
+        <p className="p-4 text-center text-sm text-gray-500">{modalMessage}</p>
         <div className="flex justify-center items-center my-4">
           <span
             onClick={() => actionBtn()}
-            className="bg-green-500 hover:bg-[#14344C] transition-colors duration-500 text-white text-sm px-6 py-1 rounded-sm cursor-pointer"
+            className="hover:bg-red-500 bg-[#14344C] transition-colors duration-200 text-white text-sm px-6 py-1 rounded-sm cursor-pointer"
           >
             {actionText}
           </span>
