@@ -1,7 +1,7 @@
 "use client";
 import Guest from "@/components/Layout/Guest";
 import Authenticated from "@/components/Layout/Authenticated";
-import { HomePage } from "@/pages/Home";
+import HomePage from "@/pages/Home";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
