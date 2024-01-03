@@ -6,7 +6,7 @@ import { columns } from "../../utilities/table.json";
 import axios from "axios";
 import {DashboardStatsType, UrlProps} from "../../utilities/types";
 
-export const HomePage: React.FC = (props) => {
+const HomePage: React.FC = (props) => {
   const {} = props;
   const [listUrls, setListUrls] = useState<UrlProps[]>([]);
   const [dashboardStats, setDashboardStats] = useState<DashboardStatsType>({total_clicked: 0, total_unclicked: 0, total_deleted: 0, total_shortened: 0});
@@ -103,3 +103,4 @@ export const HomePage: React.FC = (props) => {
     </>
   );
 };
+export default HomePage;
