@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { TableProps } from "../../utilities/types";
 import { Clipboard, Share2, Trash2 } from "react-feather";
 import Modal from "./Modal";
@@ -11,7 +11,6 @@ const CustomTable: FC<TableProps> = ({
   className,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [tableData, setTableData] = useState(data);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [toBeDeleteRows, setToBeDeletedRows] = useState<Set<number>>(new Set());
   const [deleteSingleRowModal, setDeleteSingleRowModal] =
@@ -42,7 +41,7 @@ const CustomTable: FC<TableProps> = ({
   };
 
   const deleteSingleRow = () => {
-    setTableData(data.filter((data) => !toBeDeleteRows.has(data.id)));
+    data.filter((data) => !toBeDeleteRows.has(data.id));
     setDeleteSingleRowModal(false);
   };
 
