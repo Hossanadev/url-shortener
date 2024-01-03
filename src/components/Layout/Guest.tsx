@@ -32,6 +32,8 @@ const Guest: FC<GuestProps> = (props) => {
         } catch (error) {
             console.log(error);
         }
+        // persist error message if no api connection is made to the server
+        setLoginError("Error connecting to server!");
     };
 
     return (
